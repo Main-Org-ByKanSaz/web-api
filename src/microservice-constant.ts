@@ -1,0 +1,1 @@
+export const USER_SERVICE = { HOST: 'USER_SERVICE_HOST' };
