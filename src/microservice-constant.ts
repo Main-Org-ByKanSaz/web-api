@@ -1,1 +1,15 @@
-export const USER_SERVICE = { HOST: 'USER_SERVICE_HOST' };
+import { PatternMetadata } from '@nestjs/microservices';
+import { GetUserByIdDto } from './users/dto/get-user-by-id.dto';
+
+//User
+export const USER_SERVICE = 'USER_SERVICE';
+export const UserPattern: Record<string, PatternMetadata> = {
+  getUserById: {
+    method: 'GET',
+    path: 'get_user_by_id',
+  },
+  getUserByUsername: {
+    method: 'GET',
+    path: 'get_user_by_username',
+  },
+};
