@@ -10,6 +10,6 @@ export class GetUserByIdDto {
   })
   @IsNotEmpty()
   @IsNumber()
-  @Type(() => Number) // Ensures the query parameter string is converted to a number
+  @Type(() => Number)
   userId!: number;
 }

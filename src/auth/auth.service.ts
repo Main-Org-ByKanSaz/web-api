@@ -1,7 +1,10 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UserService } from '../users/user.service';
+import { userEntity } from '../users/entities/user-entity';
+import { loginEntity } from './entities/login-entity';
+import { PASSWORD_NULL } from '../constant';
 
 @Injectable()
 export class AuthService {
@@ -10,24 +13,31 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
-  async validateUser(username: string, password: string): Promise<any> {
+  async validateUser(username: string, password: string): Promise<userEntity> {
     const user = await this.userService.getUserByUsername(username);
 
     if (!user) {
-      return null;
+      throw new Error('user not found');
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      user.password ?? PASSWORD_NULL,
+    );
     if (isPasswordValid) {
-      const { password, ...result } = user;
+      const { password, roles, ...result } = user;
       return result;
     }
+
+    throw new Error('internal server error');
   }
 
-  async login(user: any) {
-    const payload = { username: user.username, sub: user.userId }; //TODO chang user interface
+  async login(user: userEntity): Promise<loginEntity> {
+    const { password, roles, ...result } = user;
+    const payload = { name: result.name, userId: result.userId };
 
     return {
+      ...result,
       access_token: this.jwtService.sign(payload),
     };
   }

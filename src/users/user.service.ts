@@ -3,6 +3,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { UserPattern, USER_SERVICE } from '../microservice-constant';
 import { getUserByIdPayload } from './payload/get-user-by-id.dto';
 import { firstValueFrom } from 'rxjs';
+import { userEntity } from './entities/user-entity';
 
 @Injectable()
 export class UserService {
@@ -10,14 +11,14 @@ export class UserService {
     @Inject(USER_SERVICE) private readonly userService: ClientProxy,
   ) {}
 
-  async getUserById(userId: number): Promise<any> {
+  async getUserById(userId: number): Promise<userEntity> {
     const payload: getUserByIdPayload = { userId };
     return firstValueFrom(
-      this.userService.send(UserPattern.getUserById, payload),
+      this.userService.send<userEntity>(UserPattern.getUserById, payload),
     );
   }
 
-  async getUserByUsername(username: string): Promise<any> {
+  async getUserByUsername(username: string): Promise<userEntity> {
     const payload = { username };
     return firstValueFrom(
       this.userService.send(UserPattern.getUserByUsername, payload),

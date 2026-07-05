@@ -1,3 +1,3 @@
-export class getUserByIdPayload {
-  userId!: number;
+export interface getUserByIdPayload {
+  userId: number;
 }

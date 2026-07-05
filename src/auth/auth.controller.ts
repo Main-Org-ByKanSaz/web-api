@@ -11,6 +11,7 @@ import { LoginDto } from './dto/login.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { Public } from '../decorator/public.decorator';
+import { userEntity } from '../users/entities/user-entity';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -22,17 +23,8 @@ export class AuthController {
   @Post('login')
   @ApiOperation({ summary: 'Log in a user and get a JWT token' })
   @ApiBody({ type: LoginDto })
-  @ApiResponse({
-    status: 200,
-    description: 'User successfully logged in, returns JWT token',
-    schema: {
-      example: {
-        access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
-      },
-    },
-  })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async login(@Request() req: Record<string, any>) {
+  async login(@Request() req: Record<string, userEntity>) {
     return this.authService.login(req.user);
   }
 

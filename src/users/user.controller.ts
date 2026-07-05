@@ -2,6 +2,7 @@ import { Controller, Get, Query } from '@nestjs/common';
 import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { GetUserByIdDto } from './dto/get-user-by-id.dto';
 import { UserService } from './user.service';
+import { userEntity } from './entities/user-entity';
 
 @ApiTags('users')
 @ApiBearerAuth()
@@ -17,7 +18,7 @@ export class UserController {
     example: 1,
     required: true,
   })
-  getUserById(@Query() query: GetUserByIdDto): any {
+  getUserById(@Query() query: GetUserByIdDto): Promise<userEntity> {
     return this.appService.getUserById(query.userId);
   }
 
