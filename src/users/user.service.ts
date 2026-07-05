@@ -11,7 +11,7 @@ export class UserService {
     @Inject(USER_SERVICE) private readonly userService: ClientProxy,
   ) {}
 
-  async getUserById(userId: number): Promise<userEntity> {
+  async getUserById(userId: string): Promise<userEntity> {
     const payload: getUserByIdPayload = { userId };
     return firstValueFrom(
       this.userService.send<userEntity>(UserPattern.getUserById, payload),

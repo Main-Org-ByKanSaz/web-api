@@ -13,9 +13,9 @@ export class UserController {
   @Get()
   @ApiQuery({
     name: 'userId',
-    type: Number,
+    type: String,
     description: 'The ID of the user to retrieve',
-    example: 1,
+    example: 'usr_9x1vmo88',
     required: true,
   })
   getUserById(@Query() query: GetUserByIdDto): Promise<userEntity> {
