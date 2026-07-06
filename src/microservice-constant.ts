@@ -1,5 +1,4 @@
 import { PatternMetadata } from '@nestjs/microservices';
-import { GetUserByIdDto } from './users/dto/get-user-by-id.dto';
 
 //User
 export const USER_SERVICE = 'USER_SERVICE';

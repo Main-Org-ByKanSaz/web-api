@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+
+import { USER_SERVICE } from '../microservice-constant';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { USER_SERVICE } from '../microservice-constant';
 
 @Module({
   imports: [

@@ -1,9 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { UserPattern, USER_SERVICE } from '../microservice-constant';
-import { getUserByIdPayload } from './payload/get-user-by-id.dto';
 import { firstValueFrom } from 'rxjs';
+
+import { USER_SERVICE, UserPattern } from '../microservice-constant';
 import { userEntity } from './entities/user-entity';
+import { getUserByIdPayload } from './payload/get-user-by-id.dto';
 
 @Injectable()
 export class UserService {
