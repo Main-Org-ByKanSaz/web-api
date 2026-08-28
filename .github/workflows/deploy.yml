@@ -1,4 +1,4 @@
-name: Deploy NestJS to AWS ECS
+name: Deploy web-api
 
 on:
   push:
@@ -50,8 +50,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config user.name
-          git config user.email
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           if ! git diff-index --quiet HEAD; then
             git commit -m "chore: update image tag to ${{ github.sha }}"
