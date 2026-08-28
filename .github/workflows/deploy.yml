@@ -50,6 +50,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
+          git config user.name
+          git config user.email
           git add .
           if ! git diff-index --quiet HEAD; then
             git commit -m "chore: update image tag to ${{ github.sha }}"
