@@ -9,7 +9,7 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install --only=production
 COPY --from=builder /app/dist ./dist
 
 EXPOSE 3000
